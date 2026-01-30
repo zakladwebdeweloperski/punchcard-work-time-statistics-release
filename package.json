@@ -1,0 +1,90 @@
+{
+  "name": "punchcard-work-time-statistics",
+  "displayName": "PUNCHCARD - Work Time Statistics",
+  "description": "Track active coding time, keystrokes, and code metrics across projects with automatic AFK detection",
+  "version": "1.0.0",
+  "publisher": "ZakladWebdeweloperski",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "time tracking",
+    "productivity",
+    "statistics",
+    "work timer",
+    "coding time",
+    "metrics"
+  ],
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zakladwebdeweloperski/punchcard-work-time-statistics-release"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "workTimer.showStats",
+        "title": "PUNCHCARD: Show Statistics",
+        "category": "Work Timer"
+      },
+      {
+        "command": "workTimer.resetProject",
+        "title": "PUNCHCARD: Reset Current Project Statistics",
+        "category": "Work Timer"
+      },
+      {
+        "command": "workTimer.resetAll",
+        "title": "PUNCHCARD: Reset All Statistics",
+        "category": "Work Timer"
+      },
+      {
+        "command": "workTimer.exportData",
+        "title": "PUNCHCARD: Export Data to JSON",
+        "category": "Work Timer"
+      }
+    ],
+    "configuration": {
+      "title": "PUNCHCARD - Work Time Statistics",
+      "properties": {
+        "workTimer.afkThreshold": {
+          "type": "number",
+          "default": 300000,
+          "description": "Time in milliseconds before user is considered AFK (default: 5 minutes = 300000ms)"
+        },
+        "workTimer.trackOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Start tracking time automatically when VS Code opens"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack && node copy-to-release.js",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map && node copy-to-release.js",
+    "pretest": "npm run compile",
+    "test": "node ./src/test/runTest.js",
+    "test:unit": "mocha src/test/**/*.test.js",
+    "copy-release": "node copy-to-release.js",
+    "vsce:package": "vsce package",
+    "vsce:publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.22.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
