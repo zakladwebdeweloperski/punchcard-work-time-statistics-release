@@ -3,7 +3,7 @@
 Track active coding time, keystrokes, and code metrics across projects with automatic AFK detection.
 
 ![PUNCHCARD Extension](https://img.shields.io/badge/VS%20Code-Extension-blue)
-![Version](https://img.shields.io/badge/version-1.0.0-green)
+![Version](https://img.shields.io/badge/version-1.1.0-green)
 
 ## Features
 
@@ -15,9 +15,9 @@ Track active coding time, keystrokes, and code metrics across projects with auto
 
 ### 📊 Metrics Tracked
 - Total active coding time
-- Lines added and deleted
+- Lines added and deleted (typed vs bulk/paste operations)
 - Characters added and deleted  
-- Total keystrokes
+- Total keystrokes (actual key presses, not pasted characters)
 - Number of sessions
 - Last active timestamp
 
@@ -25,13 +25,17 @@ Track active coding time, keystrokes, and code metrics across projects with auto
 - Interactive charts powered by Chart.js
 - Daily, weekly, and monthly trends
 - Keystrokes distribution by project
-- Lines changed comparison
+- Lines changed comparison (typed vs bulk operations)
 - Real-time session timer in status bar
+- Individual stat reset buttons for fine-grained control
 
-### 🔄 Data Sync
-- Uses VS Code's built-in Settings Sync
+### 🔄 Data Sync & Management
+- Uses VS Code's built-in globalState sync
 - Your statistics sync automatically across machines
-- No external services or accounts required
+- Intelligent merge handling for sync race conditions
+- Export/import data via JSON for manual backup
+- Reset individual stats or entire projects
+- Sync status checking and debugging tools
 
 ## Installation
 
@@ -61,6 +65,8 @@ Open the Command Palette (`Ctrl+Shift+P`) and type:
 | `PUNCHCARD: Reset Current Project Statistics` | Reset stats for current workspace |
 | `PUNCHCARD: Reset All Statistics` | Reset all tracked statistics |
 | `PUNCHCARD: Export Data to JSON` | Export all data to a JSON file |
+| `PUNCHCARD: Import Data from JSON` | Import and merge data from a JSON file |
+| `PUNCHCARD: Check Sync Status` | Check sync requirements and current data summary |
 
 ### Statistics Panel
 The statistics panel shows:
@@ -75,8 +81,8 @@ Configure the extension in your `settings.json`:
 
 ```json
 {
-  "workTimer.afkThreshold": 300000,
-  "workTimer.trackOnStartup": true
+  "punchcardWorkTimer.afkThreshold": 300000,
+  "punchcardWorkTimer.trackOnStartup": true
 }
 ```
 
@@ -84,8 +90,8 @@ Configure the extension in your `settings.json`:
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| `workTimer.afkThreshold` | number | `300000` | Time in milliseconds before user is considered AFK (default: 5 minutes) |
-| `workTimer.trackOnStartup` | boolean | `true` | Start tracking time automatically when VS Code opens |
+| `punchcardWorkTimer.afkThreshold` | number | `300000` | Time in milliseconds before user is considered AFK (default: 5 minutes) |
+| `punchcardWorkTimer.trackOnStartup` | boolean | `true` | Start tracking time automatically when VS Code opens |
 
 ## How AFK Detection Works
 
@@ -96,6 +102,20 @@ The extension monitors your activity through:
 - File switching
 
 When no activity is detected for the configured threshold (default 5 minutes), tracking pauses automatically. When you resume activity, a new session begins.
+
+## Sync Across Devices
+
+For statistics to sync across your devices:
+1. **Settings Sync must be enabled** in VS Code (`Ctrl+Shift+P` → "Settings Sync: Turn On")
+2. **"UI State" must be checked** in sync preferences (globalState syncs under UI State)
+3. Use the same Microsoft/GitHub account on all devices
+4. Run **"Settings Sync: Sync Now"** to force immediate sync
+5. **Reload VS Code** on other devices after syncing
+
+**Troubleshooting Sync:**
+- Use `PUNCHCARD: Check Sync Status` command to verify setup
+- Export/import data manually if needed using the JSON commands
+- The extension automatically merges data from multiple devices intelligently
 
 ## Data Structure
 
@@ -108,6 +128,8 @@ Your statistics are stored in VS Code's globalState and synced via Settings Sync
       "totalTime": 0,
       "linesAdded": 0,
       "linesDeleted": 0,
+      "linesAddedBulk": 0,
+      "linesDeletedBulk": 0,
       "charactersAdded": 0,
       "charactersDeleted": 0,
       "keystrokes": 0,

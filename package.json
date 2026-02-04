@@ -2,7 +2,7 @@
   "name": "punchcard-work-time-statistics",
   "displayName": "PUNCHCARD - Work Time Statistics",
   "description": "Track active coding time, keystrokes, and code metrics across projects with automatic AFK detection",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "ZakladWebdeweloperski",
   "engines": {
     "vscode": "^1.85.0"
@@ -48,17 +48,27 @@
         "command": "workTimer.exportData",
         "title": "PUNCHCARD: Export Data to JSON",
         "category": "Work Timer"
+      },
+      {
+        "command": "workTimer.importData",
+        "title": "PUNCHCARD: Import Data from JSON",
+        "category": "Work Timer"
+      },
+      {
+        "command": "workTimer.checkSync",
+        "title": "PUNCHCARD: Check Sync Status",
+        "category": "Work Timer"
       }
     ],
     "configuration": {
       "title": "PUNCHCARD - Work Time Statistics",
       "properties": {
-        "workTimer.afkThreshold": {
+        "punchcardWorkTimer.afkThreshold": {
           "type": "number",
           "default": 300000,
           "description": "Time in milliseconds before user is considered AFK (default: 5 minutes = 300000ms)"
         },
-        "workTimer.trackOnStartup": {
+        "punchcardWorkTimer.trackOnStartup": {
           "type": "boolean",
           "default": true,
           "description": "Start tracking time automatically when VS Code opens"
