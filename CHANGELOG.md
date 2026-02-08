@@ -5,6 +5,18 @@ All notable changes to the "PUNCHCARD - Work Time Statistics" extension will be 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-08
+
+### Changed
+- **DEVELOPMENT**: Migrated test suite from Mocha to Vitest for improved performance and developer experience
+- All 72 unit tests now run 3-5x faster with Vitest's optimized test runner
+- Improved test command with watch mode: `npm run test:watch`
+
+### Improved
+- Test infrastructure is now more maintainable with Vitest's modern tooling
+- Better test output formatting and error reporting
+- Faster test feedback during development
+
 ## [1.1.0] - 2026-02-04
 
 ### Added
