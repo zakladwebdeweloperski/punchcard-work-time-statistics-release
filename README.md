@@ -32,7 +32,8 @@ Track active coding time, keystrokes, and code metrics across projects with auto
 ### 🔄 Data Sync & Management
 - Uses VS Code's built-in globalState sync
 - Your statistics sync automatically across machines
-- Intelligent merge handling for sync race conditions
+- **Robust sync merge logic**: Sessions are the source of truth, preventing time data loss
+- Intelligent conflict resolution: keeps most complete session data when merging
 - Export/import data via JSON for manual backup
 - Reset individual stats or entire projects
 - Sync status checking and debugging tools
@@ -115,7 +116,9 @@ For statistics to sync across your devices:
 **Troubleshooting Sync:**
 - Use `PUNCHCARD: Check Sync Status` command to verify setup
 - Export/import data manually if needed using the JSON commands
-- The extension automatically merges data from multiple devices intelligently
+- The extension uses session-based merging to ensure no time data is lost
+- Sessions are automatically deduplicated by start time across devices
+- When sessions conflict, the one with longer duration (more complete) is kept
 
 ## Data Structure
 

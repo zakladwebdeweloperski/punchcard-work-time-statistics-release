@@ -5,6 +5,17 @@ All notable changes to the "PUNCHCARD - Work Time Statistics" extension will be 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-02-12
+
+### Fixed
+- **CRITICAL**: Fixed cross-machine synchronization losing time data
+  - `checkForSyncedData` now properly detects new sessions even when local totalTime is higher
+  - `totalTime` is now derived from merged sessions instead of using Math.max, preventing data loss
+  - `mergeSessions` now keeps the session with longer duration on conflict (more up-to-date)
+  - `importData` now properly deduplicates sessions instead of concatenating them
+- Sessions are now the source of truth for time tracking accuracy
+- Added 7 comprehensive tests for cross-machine sync scenarios
+
 ## [1.2.0] - 2026-02-08
 
 ### Changed

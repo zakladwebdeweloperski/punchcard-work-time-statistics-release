@@ -182,6 +182,7 @@ npm run test:unit # Run unit tests
 
 ### Packaging
 ```bash
+npm run vscode:prepublish
 npm run vsce:package  # Creates .vsix file
 npm run vsce:publish  # Publish to marketplace
 ```
