@@ -3,7 +3,7 @@
 Track active coding time, keystrokes, and code metrics across projects with automatic AFK detection.
 
 ![PUNCHCARD Extension](https://img.shields.io/badge/VS%20Code-Extension-blue)
-![Version](https://img.shields.io/badge/version-1.2.0-green)
+![Version](https://img.shields.io/badge/version-1.3.0-green)
 
 ## Features
 
@@ -26,6 +26,8 @@ Track active coding time, keystrokes, and code metrics across projects with auto
 - Daily, weekly, and monthly trends
 - Keystrokes distribution by project
 - Lines changed comparison (typed vs bulk operations)
+- **Period-based views**: Switch between Today, This Week, This Month, and All Time
+- All summary cards and project stats update dynamically per selected period
 - Real-time session timer in status bar
 - Individual stat reset buttons for fine-grained control
 
@@ -36,7 +38,8 @@ Track active coding time, keystrokes, and code metrics across projects with auto
 - Intelligent conflict resolution: keeps most complete session data when merging
 - Export/import data via JSON for manual backup
 - Reset individual stats or entire projects
-- Sync status checking and debugging tools
+- **Sync & Debug Log panel**: collapsible log viewer with category/level filtering
+- Force sync check and clear logs from within the statistics panel
 
 ## Installation
 
@@ -68,13 +71,16 @@ Open the Command Palette (`Ctrl+Shift+P`) and type:
 | `PUNCHCARD: Export Data to JSON` | Export all data to a JSON file |
 | `PUNCHCARD: Import Data from JSON` | Import and merge data from a JSON file |
 | `PUNCHCARD: Check Sync Status` | Check sync requirements and current data summary |
+| `PUNCHCARD: Force Sync Check` | Force an immediate sync data check |
+| `PUNCHCARD: Clear Sync Log` | Clear the sync debug log entries |
 
 ### Statistics Panel
 The statistics panel shows:
-- **Summary Cards**: Session time, today's time, total time, keystrokes, lines changed, project count
-- **Overview Tab**: Daily coding time chart
-- **Projects Tab**: Detailed breakdown by project
-- **Trends Tab**: Keystrokes and lines changed charts
+- **Period Tabs**: Switch between Today, This Week, This Month, and All Time views
+- **Summary Cards**: Total time, projects, sessions, keystrokes, lines added/deleted, characters — all filtered by selected period
+- **Charts**: Daily, weekly, and monthly activity trends + time by project doughnut chart
+- **Projects**: Per-project detailed metrics for the selected period
+- **Sync & Debug Log**: Expandable section with machine info, sync events, and filterable log entries
 
 ## Configuration
 
@@ -137,6 +143,18 @@ Your statistics are stored in VS Code's globalState and synced via Settings Sync
       "charactersDeleted": 0,
       "keystrokes": 0,
       "sessions": [],
+      "dailyMetrics": {
+        "2026-02-17": {
+          "time": 0,
+          "keystrokes": 0,
+          "linesAdded": 0,
+          "linesDeleted": 0,
+          "linesAddedBulk": 0,
+          "linesDeletedBulk": 0,
+          "charactersAdded": 0,
+          "charactersDeleted": 0
+        }
+      },
       "lastActive": 0
     }
   },

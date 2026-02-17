@@ -5,6 +5,27 @@ All notable changes to the "PUNCHCARD - Work Time Statistics" extension will be 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-17
+
+### Added
+- **Period-based statistics**: All metrics (time, keystrokes, lines, characters) are now aggregated by day and can be viewed by period
+- **Period selector tabs**: Switch between Today, This Week, This Month, and All Time in the statistics panel
+- Summary cards and project stats update dynamically when switching periods
+- Daily metrics tracking (`dailyMetrics` map per project) for accurate period breakdowns
+- **Sync & Debug Log panel**: Collapsible log viewer built into the statistics panel
+  - Machine ID, save count, sync events, merge count, sessions by machine
+  - Log filtering by category (sync, storage, tracker, session, merge, init) and level (error, warn, info, debug)
+  - Force Sync Check and Clear Logs buttons
+- New commands: `PUNCHCARD: Force Sync Check` and `PUNCHCARD: Clear Sync Log`
+
+### Changed
+- Statistics panel now defaults to All Time view with instant client-side period switching
+- Period badge on Projects section header shows currently selected time range
+- Daily metrics are merged across machines using per-field Math.max strategy
+
+### Fixed
+- Period tab switching no longer causes visual jerk (transparent borders, no font-weight reflow)
+
 ## [1.2.1] - 2026-02-12
 
 ### Fixed
