@@ -3,7 +3,9 @@
 Track active coding time, keystrokes, and code metrics across projects with automatic AFK detection.
 
 ![PUNCHCARD Extension](https://img.shields.io/badge/VS%20Code-Extension-blue)
-![Version](https://img.shields.io/badge/version-1.3.0-green)
+![Version](https://img.shields.io/badge/version-1.3.2-green)
+
+![DoToDos Screenshot](https://raw.githubusercontent.com/zakladwebdeweloperski/punchcard-work-time-statistics-release/main/images/punchcard-screenshot.jpg)
 
 ## Features
 

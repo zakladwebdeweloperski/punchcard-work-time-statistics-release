@@ -5,6 +5,16 @@ All notable changes to the "PUNCHCARD - Work Time Statistics" extension will be 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2026-02-20
+
+### Fixed
+- **CRITICAL**: Fixed false sync detection storm when multiple VS Code windows are open on the same machine
+  - Same-machine `_saveId` mismatches are now recognized and skipped instead of triggering merges
+  - Eliminates the ping-pong loop where windows continuously merge each other's saves
+  - Prevents time inflation caused by repeated session duration replacements during false merges
+  - Prevents VS Code Settings Sync rate-limiting ("too many sync — sync disabled") caused by excessive `globalState.update()` calls
+  - Cross-machine sync continues to work normally — only same-machine mismatches are skipped
+
 ## [1.3.0] - 2026-02-17
 
 ### Added
