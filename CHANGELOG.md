@@ -5,6 +5,16 @@ All notable changes to the "PUNCHCARD - Work Time Statistics" extension will be 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-03-14
+
+### Fixed
+- **CRITICAL**: Fixed VS Code Settings Sync rate-limiting error ("Too many requests. Only 100 requests allowed in 5 minutes")
+  - Added a 30-second global throttle on `globalState` writes — prevents excessive writes from triggering Settings Sync too frequently
+  - Increased save debounce from 10s to 30s for high-frequency operations (`addTime`, `updateLastSession`, `addMetrics`)
+  - Reduced periodic sync check interval from 60s to 5 minutes
+  - Reduced startup sync checks from 3 (at 5s/15s/30s) to 2 (at 10s/60s)
+  - Deactivation save always bypasses the throttle to ensure no data is lost on window close
+
 ## [1.3.2] - 2026-02-20
 
 ### Fixed
